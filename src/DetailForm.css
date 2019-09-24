@@ -1,7 +1,7 @@
-legend {
+.react-material-final-form > legend {
     font-size: 10px !important;
 }
 
-.form-field-container {
+.react-material-final-form > .form-field-container {
     margin-top: 10px!important;
 }

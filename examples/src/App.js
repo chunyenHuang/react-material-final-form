@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import DetailForm from 'react-material-final-form';
 
 const metadata = {
-  title: 'Create a new form',
+  title: 'My form',
   fields: [{
     key: 'text',
     type: 'String',
@@ -11,7 +11,7 @@ const metadata = {
     key: 'defaultValue',
     type: 'String',
     label: 'Default Value',
-  },  {
+  }, {
     key: 'number',
     type: 'Number',
     label: 'Number',
@@ -30,7 +30,9 @@ const data = {
 function App() {
   return (
     <Fragment>
+      <h1>React Material Final Form</h1>
       <DetailForm 
+        title={metadata.title}
         metadata={metadata}
         data={data}
         debug={true}

@@ -40,8 +40,8 @@ function renderFormField(inFormFieldProp = {}, inPrefixKey) {
   } = inFormFieldProp;
 
   const formKey = (inPrefixKey) ? `${inPrefixKey}[${key}]` : key;
-  switch (formType) {
-  case 'Object':
+  switch (formType.toLocaleLowerCase()) {
+  case 'object':
     return (<Fragment>
       <Typography variant="body1">{label}</Typography>
       {formObjects.map((item, index) => {
@@ -50,7 +50,7 @@ function renderFormField(inFormFieldProp = {}, inPrefixKey) {
         </Fragment>);
       })}
     </Fragment>);
-  case 'InputArray':
+  case 'inputarray':
     return (<Fragment>
       <Typography variant="body1">{label}</Typography>
       <FieldArray name={formKey}>
@@ -67,19 +67,19 @@ function renderFormField(inFormFieldProp = {}, inPrefixKey) {
           )}
       </FieldArray>
     </Fragment>);
-  case 'Select':
+  case 'select':
     return formSelect(formKey, label, isRequired, formOptions);
-  case 'Checkbox':
+  case 'checkbox':
     return formCheckbox(formKey, label, isRequired, formOptions);
-  case 'Radio':
+  case 'radio':
     return formRadio(formKey, label, isRequired, formOptions);
-  case 'Textarea':
+  case 'textarea':
     return formTextarea(formKey, label, isRequired);
-  case 'Date':
+  case 'date':
     return formDate(formKey, label, isRequired);
-  case 'DateTime':
+  case 'datetime':
     return formDateTime(formKey, label, isRequired);
-  case 'Phone':
+  case 'phone':
     return formInputPhone(formKey, label, isRequired);
   default:
     // text input

@@ -103,6 +103,7 @@ export default class DetailForm extends Component {
         {
           metadata && !nested && title &&
           <Form
+            className="react-material-final-form"
             onSubmit={onSubmit}
             mutators={{ setFieldData, ...arrayMutators }}
             initialValues={data}
