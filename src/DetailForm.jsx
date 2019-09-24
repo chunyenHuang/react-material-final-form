@@ -23,10 +23,14 @@ export default class DetailForm extends Component {
   componentDidMount = () => {}
 
   renderNestedForm = (renderProps) => {
-    const { metadata, debug } = this.props;
+    const {
+      metadata,
+      debug,
+      submitButtonText = 'Save'
+    } = this.props;
     const title = this.props.title || this.props.metadata.title || 'Form';
     const {
-      //   handleSubmit,
+      // handleSubmit,
       pristine,
       // form,
       submitting,
@@ -34,46 +38,50 @@ export default class DetailForm extends Component {
       values,
     } = renderProps;
 
-    return (<Fragment>
-      <Typography variant="h5">{title}</Typography>
+    return (
+      <Fragment>
+        <Typography variant="h5">
+          {title}
+        </Typography>
+          
+        <hr />
         
-      <hr />
-      
-      {metadata.fields.map((field, index)=>{
-        return (<Grid item xs={12} key={index} className="form-field-container">
-          {renderFormField(field)}
-        </Grid>);
-      })}
+        {metadata.fields.map((field, index)=>{
+          return (<Grid item xs={12} key={index} className="form-field-container">
+            {renderFormField(field)}
+          </Grid>);
+        })}
 
-      <Grid container alignItems="flex-start" spacing={8} style={{ 'marginTop': '20px' }}>
-        <Grid item xs={6} align="left">
-          {/* <Button
-            variant="outlined"
-            color="secondary"
-            onClick={()=>{
-                this.resetConfirm(form);
-            }}
-            disabled={submitting}
+        <Grid container alignItems="flex-start" spacing={8} style={{ 'marginTop': '20px' }}>
+          <Grid item xs={6} align="left">
+            {/* <Button
+              variant="outlined"
+              color="secondary"
+              onClick={()=>{
+                  this.resetConfirm(form);
+              }}
+              disabled={submitting}
+              >
+              Reset
+              </Button> */}
+          </Grid>
+          <Grid item xs={6} align="right">
+            <Button 
+              variant="contained"
+              color="primary"
+              type="submit"
+              disabled={submitting || invalid || pristine}
             >
-            Reset
-            </Button> */}
+              {submitButtonText}
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={6} align="right">
-          <Button 
-            variant="contained"
-            color="primary"
-            type="submit"
-            disabled={submitting || invalid || pristine}
-          >
-            Save
-          </Button>
-        </Grid>
-      </Grid>
-      {
-        debug &&
-        <pre>{JSON.stringify((values || {}), 0, 2)}</pre>
-      }
-    </Fragment>);
+        {
+          debug &&
+          <pre>{JSON.stringify((values || {}), 0, 2)}</pre>
+        }
+      </Fragment>
+    );
   };
 
   render() {
@@ -89,7 +97,7 @@ export default class DetailForm extends Component {
     const title = this.props.title || this.props.metadata.title || 'Form';
 
     return (
-      <Fragment>        
+      <div className="react-material-final-form">        
         {loading && 
           <Grid item xs={12} align="center">
             <CircularProgress />
@@ -103,7 +111,6 @@ export default class DetailForm extends Component {
         {
           metadata && !nested && title &&
           <Form
-            className="react-material-final-form"
             onSubmit={onSubmit}
             mutators={{ setFieldData, ...arrayMutators }}
             initialValues={data}
@@ -116,6 +123,6 @@ export default class DetailForm extends Component {
             }}
           />
         }
-      </Fragment>);
+      </div>);
   }
 }

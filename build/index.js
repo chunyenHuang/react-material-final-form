@@ -49,6 +49,134 @@ var metadata = {
     type: 'string',
     label: 'Disabled Field',
     isDisabled: true
+  }, {
+    key: 'notRequired',
+    type: 'string',
+    label: 'Not Required field',
+    isRequired: false
+  }, {
+    key: 'radio',
+    type: 'number',
+    label: 'Radio',
+    formType: 'Radio',
+    formOptions: [{
+      label: '1',
+      value: 1
+    }, {
+      label: '2',
+      value: 2
+    }, {
+      label: '3',
+      value: 3
+    }]
+  }, {
+    key: 'radio2',
+    type: 'number',
+    label: 'Radio',
+    formType: 'Radio',
+    formOptions: [{
+      label: 'a',
+      value: 'a'
+    }, {
+      label: 'b',
+      value: 'b'
+    }, {
+      label: 'c',
+      value: 'c'
+    }]
+  }, {
+    key: 'profile.address',
+    type: 'Array',
+    label: 'Address',
+    formType: 'InputArray',
+    formInputArrayObject: [{
+      key: 'street',
+      label: 'Street'
+    }, {
+      key: 'city',
+      label: 'City'
+    }, {
+      key: 'state',
+      label: 'State'
+    }, {
+      key: 'zipCode',
+      label: 'Zip Code'
+    }]
+  }, {
+    key: 'selectObject',
+    type: 'Object',
+    label: 'Select Object',
+    formType: 'Object',
+    formObjects: [{
+      key: 'prop1',
+      type: 'Number',
+      label: 'Prop 1',
+      formType: 'Select',
+      formOptions: [{
+        label: '1',
+        value: 1
+      }, {
+        label: '2',
+        value: 2
+      }, {
+        label: '3',
+        value: 3
+      }]
+    }, {
+      key: 'prop2',
+      type: 'Number',
+      label: 'Prop 2',
+      formType: 'Radio',
+      formOptions: [{
+        label: 'a',
+        value: 'a'
+      }, {
+        label: 'b',
+        value: 'b'
+      }, {
+        label: 'c',
+        value: 'c'
+      }]
+    }]
+  }, {
+    key: 'checkbox',
+    type: 'Array',
+    label: 'Checkbox',
+    formType: 'Checkbox',
+    formOptions: [{
+      label: 'English',
+      value: 'English'
+    }, {
+      label: 'Mandarin',
+      value: 'Mandarin'
+    }, {
+      label: 'Spanish',
+      value: 'Spanish'
+    }, {
+      label: 'Cantonese',
+      value: 'Cantonese'
+    }, {
+      label: 'Vietnamese',
+      value: 'Vietnamese'
+    }, {
+      label: 'Tagalog',
+      value: 'Tagalog'
+    }, {
+      label: 'Malay',
+      value: 'Malay'
+    }, {
+      label: 'Korean',
+      value: 'Korean'
+    }, {
+      label: 'Japanese',
+      value: 'Japanese'
+    }, {
+      label: 'French',
+      value: 'French'
+    }, {
+      label: 'German',
+      value: 'German'
+    }]
   }]
 };
 var data = {
@@ -58,7 +186,22 @@ var data = {
   number: 1024,
   date: '2019-02-01',
   dateTime: '2019-01-21T12:59:01',
-  disabledField: 'Disabled'
+  disabledField: 'Disabled',
+  radio: 1,
+  radio2: 'c',
+  profile: {
+    address: [{
+      street: 'my st',
+      city: 'Irvine',
+      state: 'CA',
+      zipCode: '92603'
+    }]
+  },
+  selectObject: {
+    prop1: 1,
+    prop2: 'b'
+  },
+  checkbox: ['Mandarin', 'French']
 };
 
 function App() {

@@ -74,7 +74,9 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "renderNestedForm", function (renderProps) {
       var _this$props = _this.props,
           metadata = _this$props.metadata,
-          debug = _this$props.debug;
+          debug = _this$props.debug,
+          _this$props$submitBut = _this$props.submitButtonText,
+          submitButtonText = _this$props$submitBut === void 0 ? 'Save' : _this$props$submitBut;
       var title = _this.props.title || _this.props.metadata.title || 'Form';
       var pristine = renderProps.pristine,
           submitting = renderProps.submitting,
@@ -109,7 +111,7 @@ function (_Component) {
         color: "primary",
         type: "submit",
         disabled: submitting || invalid || pristine
-      }, "Save"))), debug && _react.default.createElement("pre", null, JSON.stringify(values || {}, 0, 2)));
+      }, submitButtonText))), debug && _react.default.createElement("pre", null, JSON.stringify(values || {}, 0, 2)));
     });
 
     return _this;
@@ -128,12 +130,13 @@ function (_Component) {
           metadata = _this$props2.metadata,
           renderProps = _this$props2.renderProps;
       var title = this.props.title || this.props.metadata.title || 'Form';
-      return _react.default.createElement(_react.Fragment, null, loading && _react.default.createElement(_core.Grid, {
+      return _react.default.createElement("div", {
+        className: "react-material-final-form"
+      }, loading && _react.default.createElement(_core.Grid, {
         item: true,
         xs: 12,
         align: "center"
       }, _react.default.createElement(_core.CircularProgress, null)), metadata && nested && renderProps && this.renderNestedForm(renderProps), metadata && !nested && title && _react.default.createElement(_reactFinalForm.Form, {
-        className: "react-material-final-form",
         onSubmit: onSubmit,
         mutators: _objectSpread({
           setFieldData: _finalFormSetFieldData.default

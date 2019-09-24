@@ -42,35 +42,42 @@ function renderFormField(inFormFieldProp = {}, inPrefixKey) {
   const formKey = (inPrefixKey) ? `${inPrefixKey}[${key}]` : key;
   switch (formType.toLocaleLowerCase()) {
   case 'object':
-    return (<Fragment>
-      <Typography variant="body1">{label}</Typography>
-      {formObjects.map((item, index) => {
-        return (<Fragment key={index}>
-          {renderFormField(item, formKey)}
-        </Fragment>);
-      })}
-    </Fragment>);
+    return (
+      <Fragment>
+        <Typography variant="body1">{label}</Typography>
+        {formObjects.map((item, index) => {
+          return (
+            <div key={index} className="nested-form-input-field">
+              {renderFormField(item, formKey)}
+            </div>
+          );
+        })}
+      </Fragment>);
   case 'inputarray':
     return (<Fragment>
       <Typography variant="body1">{label}</Typography>
       <FieldArray name={formKey}>
         {({ fields }) =>
           fields.map((name, fieldIndex) => {
-            return (<Fragment key={fieldIndex}>
-              {formInputArrayObject.map((item, index) => {
-                return (<Fragment key={index}>
-                  {formInput(`${formKey}[${fieldIndex}][${item.key}]`, item.label)}
-                </Fragment>);
-              })}
-            </Fragment>);
+            return (
+              <Fragment key={fieldIndex}>
+                {formInputArrayObject.map((item, index) => {
+                  return (
+                    <div key={index} className="nested-form-input-field">
+                      {formInput(`${formKey}[${fieldIndex}][${item.key}]`, item.label)}
+                    </div>
+                  );
+                })}
+              </Fragment>
+            );
           }
           )}
       </FieldArray>
     </Fragment>);
   case 'select':
-    return formSelect(formKey, label, isRequired, formOptions);
+    return formSelect(formKey, label, formOptions);
   case 'checkbox':
-    return formCheckbox(formKey, label, isRequired, formOptions);
+    return formCheckbox(formKey, label, formOptions);
   case 'radio':
     return formRadio(formKey, label, isRequired, formOptions);
   case 'textarea':
@@ -93,7 +100,6 @@ function formInput(inName, inLabel, inRequired = true, inDisabled = false, inTyp
     required={inRequired}
     name={inName}
     component={TextField}
-    // placeholder={inPlacehoder}
     disabled={inDisabled}
     type={inType}
     label={inLabel}
@@ -119,7 +125,7 @@ const normalizePhone = value => {
   return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 6)}-${onlyNums.slice(6,10)}`;
 };
 
-function formInputPhone(inName, inLabel, inRequired = true, inPlacehoder = '', inDisabled = false) {
+function formInputPhone(inName, inLabel, inRequired = true, inDisabled = false) {
   return (<Field
     fullWidth
     required={inRequired}
@@ -128,7 +134,6 @@ function formInputPhone(inName, inLabel, inRequired = true, inPlacehoder = '', i
     parse={normalizePhone}
     disabled={inDisabled}
     type="text"
-    placeholder={inPlacehoder}
     label={inLabel}
   />);
 }
@@ -136,6 +141,7 @@ function formInputPhone(inName, inLabel, inRequired = true, inPlacehoder = '', i
 function formDate(inName, inLabel, inRequired = true, ) {
   return (
     <Field
+      className="date-field"
       name={inName}
       component={TextField}
       fullWidth
@@ -152,6 +158,7 @@ function formDate(inName, inLabel, inRequired = true, ) {
 function formDateTime(inName, inLabel, inRequired = true, ) {
   return (
     <Field
+      className="date-field"
       name={inName}
       component={TextField}
       fullWidth
@@ -165,7 +172,7 @@ function formDateTime(inName, inLabel, inRequired = true, ) {
     />);
 }
 
-function formTextarea(inName, inLabel, inRequired = true, inPlacehoder = '') {
+function formTextarea(inName, inLabel, inRequired = true) {
   return (<Field
     fullWidth
     name={inName}
@@ -173,11 +180,10 @@ function formTextarea(inName, inLabel, inRequired = true, inPlacehoder = '') {
     multiline
     required={inRequired}
     label={inLabel}
-    placeholder={inPlacehoder}
   />);
 }
 
-function formCheckbox(inName, inLabel, inRequired = true, inOptions, inPlacehoder = '') {
+function formCheckbox(inName, inLabel, inOptions) {
   return (
     <FormControl component="fieldset" className="form-radio-container">
       <FormLabel component="legend">{inLabel}</FormLabel>
@@ -200,7 +206,7 @@ function formCheckbox(inName, inLabel, inRequired = true, inOptions, inPlacehode
     </FormControl>);
 }
 
-function formRadio(inName, inLabel, inRequired = true, inOptions, inPlacehoder = '', inDisabled = false) {
+function formRadio(inName, inLabel, inRequired = true, inOptions, inDisabled = false) {
   return (
     <FormControl component="fieldset" className="form-radio-container">
       <FormLabel component="legend" >{inLabel}</FormLabel>
@@ -236,7 +242,7 @@ function formRadio(inName, inLabel, inRequired = true, inOptions, inPlacehoder =
     </FormControl>);
 }
 
-function formSelect(inName, inLabel, inRequired = true, inOptions, inPlacehoder = '') {
+function formSelect(inName, inLabel, inOptions) {
   return (
     <Field
       fullWidth
@@ -252,7 +258,7 @@ function formSelect(inName, inLabel, inRequired = true, inOptions, inPlacehoder 
     </Field>);
 }
 
-function formFile(inName, inLabel, inRequired, inOptions, inPlacehoder = '', inDisabled, inForm) {
+function formFile(inName, inLabel, inRequired, inOptions, inDisabled, inForm) {
   const onDrop = (files) => {
     console.log(files);
     // upload and save the link.
@@ -260,23 +266,25 @@ function formFile(inName, inLabel, inRequired, inOptions, inPlacehoder = '', inD
     inForm.blur(inName);
   };
 
-  return (<Fragment>
-    <Field name={inName}>
-      {() => (
-        <Fragment>
-          <label>{inLabel}</label>
-          <Dropzone onDrop={onDrop}>
-            {({ getRootProps, getInputProps }) => (
-              <section>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <h4>Drag 'n' drop some files here, or click to select files</h4>
-                </div>
-              </section>
-            )}
-          </Dropzone>
-        </Fragment>
-      )}
-    </Field>
-  </Fragment>);
+  return (
+    <Fragment>
+      <Field name={inName}>
+        {() => (
+          <Fragment>
+            <label>{inLabel}</label>
+            <Dropzone onDrop={onDrop}>
+              {({ getRootProps, getInputProps }) => (
+                <section>
+                  <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <h4>Drag 'n' drop some files here, or click to select files</h4>
+                  </div>
+                </section>
+              )}
+            </Dropzone>
+          </Fragment>
+        )}
+      </Field>
+    </Fragment>
+  );
 }

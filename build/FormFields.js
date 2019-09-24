@@ -53,8 +53,9 @@ function renderFormField() {
       return _react.default.createElement(_react.Fragment, null, _react.default.createElement(_core.Typography, {
         variant: "body1"
       }, label), formObjects.map(function (item, index) {
-        return _react.default.createElement(_react.Fragment, {
-          key: index
+        return _react.default.createElement("div", {
+          key: index,
+          className: "nested-form-input-field"
         }, renderFormField(item, formKey));
       }));
 
@@ -69,18 +70,19 @@ function renderFormField() {
           return _react.default.createElement(_react.Fragment, {
             key: fieldIndex
           }, formInputArrayObject.map(function (item, index) {
-            return _react.default.createElement(_react.Fragment, {
-              key: index
+            return _react.default.createElement("div", {
+              key: index,
+              className: "nested-form-input-field"
             }, formInput("".concat(formKey, "[").concat(fieldIndex, "][").concat(item.key, "]"), item.label));
           }));
         });
       }));
 
     case 'select':
-      return formSelect(formKey, label, isRequired, formOptions);
+      return formSelect(formKey, label, formOptions);
 
     case 'checkbox':
-      return formCheckbox(formKey, label, isRequired, formOptions);
+      return formCheckbox(formKey, label, formOptions);
 
     case 'radio':
       return formRadio(formKey, label, isRequired, formOptions);
@@ -111,8 +113,7 @@ function formInput(inName, inLabel) {
     fullWidth: true,
     required: inRequired,
     name: inName,
-    component: _finalFormMaterialUi.TextField // placeholder={inPlacehoder}
-    ,
+    component: _finalFormMaterialUi.TextField,
     disabled: inDisabled,
     type: inType,
     label: inLabel,
@@ -143,8 +144,7 @@ var normalizePhone = function normalizePhone(value) {
 
 function formInputPhone(inName, inLabel) {
   var inRequired = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  var inPlacehoder = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
-  var inDisabled = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  var inDisabled = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
   return _react.default.createElement(_reactFinalForm.Field, {
     fullWidth: true,
     required: inRequired,
@@ -153,7 +153,6 @@ function formInputPhone(inName, inLabel) {
     parse: normalizePhone,
     disabled: inDisabled,
     type: "text",
-    placeholder: inPlacehoder,
     label: inLabel
   });
 }
@@ -161,6 +160,7 @@ function formInputPhone(inName, inLabel) {
 function formDate(inName, inLabel) {
   var inRequired = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
   return _react.default.createElement(_reactFinalForm.Field, {
+    className: "date-field",
     name: inName,
     component: _finalFormMaterialUi.TextField,
     fullWidth: true,
@@ -177,6 +177,7 @@ function formDate(inName, inLabel) {
 function formDateTime(inName, inLabel) {
   var inRequired = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
   return _react.default.createElement(_reactFinalForm.Field, {
+    className: "date-field",
     name: inName,
     component: _finalFormMaterialUi.TextField,
     fullWidth: true,
@@ -192,22 +193,17 @@ function formDateTime(inName, inLabel) {
 
 function formTextarea(inName, inLabel) {
   var inRequired = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  var inPlacehoder = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
   return _react.default.createElement(_reactFinalForm.Field, {
     fullWidth: true,
     name: inName,
     component: _finalFormMaterialUi.TextField,
     multiline: true,
     required: inRequired,
-    label: inLabel,
-    placeholder: inPlacehoder
+    label: inLabel
   });
 }
 
-function formCheckbox(inName, inLabel) {
-  var inRequired = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  var inOptions = arguments.length > 3 ? arguments[3] : undefined;
-  var inPlacehoder = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+function formCheckbox(inName, inLabel, inOptions) {
   return _react.default.createElement(_core.FormControl, {
     component: "fieldset",
     className: "form-radio-container"
@@ -232,8 +228,7 @@ function formCheckbox(inName, inLabel) {
 function formRadio(inName, inLabel) {
   var inRequired = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
   var inOptions = arguments.length > 3 ? arguments[3] : undefined;
-  var inPlacehoder = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
-  var inDisabled = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+  var inDisabled = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
   return _react.default.createElement(_core.FormControl, {
     component: "fieldset",
     className: "form-radio-container"
@@ -270,10 +265,7 @@ function formRadio(inName, inLabel) {
   })));
 }
 
-function formSelect(inName, inLabel) {
-  var inRequired = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  var inOptions = arguments.length > 3 ? arguments[3] : undefined;
-  var inPlacehoder = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+function formSelect(inName, inLabel, inOptions) {
   return _react.default.createElement(_reactFinalForm.Field, {
     fullWidth: true,
     name: inName,
@@ -291,11 +283,7 @@ function formSelect(inName, inLabel) {
   }));
 }
 
-function formFile(inName, inLabel, inRequired, inOptions) {
-  var inPlacehoder = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
-  var inDisabled = arguments.length > 5 ? arguments[5] : undefined;
-  var inForm = arguments.length > 6 ? arguments[6] : undefined;
-
+function formFile(inName, inLabel, inRequired, inOptions, inDisabled, inForm) {
   var onDrop = function onDrop(files) {
     console.log(files); // upload and save the link.
 
