@@ -1,17 +1,17 @@
-import React, { Fragment } from 'react';
-import { Field } from 'react-final-form'
-import { FieldArray } from 'react-final-form-arrays'
+import React, { Fragment } from 'react'; // eslint-disable-line no-unused-vars
+import { Field } from 'react-final-form'; // eslint-disable-line no-unused-vars
+import { FieldArray } from 'react-final-form-arrays'; // eslint-disable-line no-unused-vars
 import { TextField, Checkbox, Radio, Select } from 'final-form-material-ui';
 import {
-  RadioGroup,
-  FormLabel,
-  MenuItem,
-  FormGroup,
-  FormControl,
-  FormControlLabel,
-  Typography,
+  RadioGroup, // eslint-disable-line no-unused-vars
+  FormLabel, // eslint-disable-line no-unused-vars
+  MenuItem, // eslint-disable-line no-unused-vars
+  FormGroup, // eslint-disable-line no-unused-vars
+  FormControl, // eslint-disable-line no-unused-vars
+  FormControlLabel, // eslint-disable-line no-unused-vars
+  Typography, // eslint-disable-line no-unused-vars
 } from '@material-ui/core';
-import Dropzone from 'react-dropzone';
+import Dropzone from 'react-dropzone'; // eslint-disable-line no-unused-vars
 
 export {
   renderFormField,
@@ -23,7 +23,7 @@ export {
   formTextarea,
   formSelect,
   formFile,
-}
+};
 
 function renderFormField(inFormFieldProp = {}, inPrefixKey) {
   let {
@@ -47,9 +47,9 @@ function renderFormField(inFormFieldProp = {}, inPrefixKey) {
       {formObjects.map((item, index) => {
         return (<Fragment key={index}>
           {renderFormField(item, formKey)}
-        </Fragment>)
+        </Fragment>);
       })}
-    </Fragment>)
+    </Fragment>);
   case 'InputArray':
     return (<Fragment>
       <Typography variant="body1">{label}</Typography>
@@ -60,30 +60,30 @@ function renderFormField(inFormFieldProp = {}, inPrefixKey) {
               {formInputArrayObject.map((item, index) => {
                 return (<Fragment key={index}>
                   {formInput(`${formKey}[${fieldIndex}][${item.key}]`, item.label)}
-                </Fragment>)
+                </Fragment>);
               })}
-            </Fragment>)
+            </Fragment>);
           }
-        )}
+          )}
       </FieldArray>
-    </Fragment>)
+    </Fragment>);
   case 'Select':
-    return formSelect(formKey, label, isRequired, formOptions)
+    return formSelect(formKey, label, isRequired, formOptions);
   case 'Checkbox':
-    return formCheckbox(formKey, label, isRequired, formOptions)
+    return formCheckbox(formKey, label, isRequired, formOptions);
   case 'Radio':
-    return formRadio(formKey, label, isRequired, formOptions)
+    return formRadio(formKey, label, isRequired, formOptions);
   case 'Textarea':
-    return formTextarea(formKey, label, isRequired)
+    return formTextarea(formKey, label, isRequired);
   case 'Date':
-    return formDate(formKey, label, isRequired)
+    return formDate(formKey, label, isRequired);
   case 'DateTime':
-    return formDateTime(formKey, label, isRequired)
+    return formDateTime(formKey, label, isRequired);
   case 'Phone':
-    return formInputPhone(formKey, label, isRequired)
+    return formInputPhone(formKey, label, isRequired);
   default:
     // text input
-    return formInput(formKey, label, isRequired, isDisabled, type)
+    return formInput(formKey, label, isRequired, isDisabled, type);
   }
 }
 
@@ -104,7 +104,7 @@ function formInput(inName, inLabel, inRequired = true, inDisabled = false, inTyp
         return value;
       }
     }}
-  />)
+  />);
 }
 
 const normalizePhone = value => {
@@ -128,40 +128,41 @@ function formInputPhone(inName, inLabel, inRequired = true, inPlacehoder = '', i
     parse={normalizePhone}
     disabled={inDisabled}
     type="text"
+    placeholder={inPlacehoder}
     label={inLabel}
-  />)
+  />);
 }
 
 function formDate(inName, inLabel, inRequired = true, ) {
   return (
     <Field
-        name={inName}
-        component={TextField}
-        fullWidth
-        required={inRequired}
-        type="date"
-        margin="normal"
-        label={inLabel}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />)
+      name={inName}
+      component={TextField}
+      fullWidth
+      required={inRequired}
+      type="date"
+      margin="normal"
+      label={inLabel}
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />);
 }
 
 function formDateTime(inName, inLabel, inRequired = true, ) {
   return (
     <Field
-        name={inName}
-        component={TextField}
-        fullWidth
-        required={inRequired}
-        type="datetime-local"
-        margin="normal"
-        label={inLabel}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />)
+      name={inName}
+      component={TextField}
+      fullWidth
+      required={inRequired}
+      type="datetime-local"
+      margin="normal"
+      label={inLabel}
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />);
 }
 
 function formTextarea(inName, inLabel, inRequired = true, inPlacehoder = '') {
@@ -172,7 +173,8 @@ function formTextarea(inName, inLabel, inRequired = true, inPlacehoder = '') {
     multiline
     required={inRequired}
     label={inLabel}
-  />)
+    placeholder={inPlacehoder}
+  />);
 }
 
 function formCheckbox(inName, inLabel, inRequired = true, inOptions, inPlacehoder = '') {
@@ -181,21 +183,21 @@ function formCheckbox(inName, inLabel, inRequired = true, inOptions, inPlacehode
       <FormLabel component="legend">{inLabel}</FormLabel>
       <FormGroup row>
         {inOptions.map((option, index)=>{
-              return (<FormControlLabel
-                key={index}
-                label={option.label}
-                control={
-                  <Field
-                    name={inName}
-                    component={Checkbox}
-                    type="checkbox"
-                    value={option.value}
-                  />
-                }
-              />)
-            })}
+          return (<FormControlLabel
+            key={index}
+            label={option.label}
+            control={
+              <Field
+                name={inName}
+                component={Checkbox}
+                type="checkbox"
+                value={option.value}
+              />
+            }
+          />);
+        })}
       </FormGroup>
-    </FormControl>)
+    </FormControl>);
 }
 
 function formRadio(inName, inLabel, inRequired = true, inOptions, inPlacehoder = '', inDisabled = false) {
@@ -206,31 +208,32 @@ function formRadio(inName, inLabel, inRequired = true, inOptions, inPlacehoder =
         {inOptions.map((option, index)=>{
           let parseType;
           switch(typeof(option.value)){
-            case 'number':
+          case 'number':
             parseType = Number;
             break;
-            case 'string':
-            default:
+          case 'string':
+          default:
             parseType = String;
           }
-          return (<FormControlLabel
-            key={index}
-            label={option.label}
-            control={
-              <Field
-                name={inName}
-                disabled={inDisabled}
-                required={inRequired}
-                component={Radio}
-                type="radio"
-                value={option.value}
-                parse={parseType}
-              />
-            }
-          />)
+          return (
+            <FormControlLabel
+              key={index}
+              label={option.label}
+              control={
+                <Field
+                  name={inName}
+                  disabled={inDisabled}
+                  required={inRequired}
+                  component={Radio}
+                  type="radio"
+                  value={option.value}
+                  parse={parseType}
+                />
+              }
+            />);
         })}
       </RadioGroup>
-    </FormControl>)
+    </FormControl>);
 }
 
 function formSelect(inName, inLabel, inRequired = true, inOptions, inPlacehoder = '') {
@@ -242,15 +245,15 @@ function formSelect(inName, inLabel, inRequired = true, inOptions, inPlacehoder 
       label={inLabel}
       required={true}
       formControlProps={{ fullWidth: true }}
-      >
-        {inOptions.map((option, index)=>{
-          return (<MenuItem key={index} value={option.value}>{option.label}</MenuItem>);
-        })}
+    >
+      {inOptions.map((option, index)=>{
+        return (<MenuItem key={index} value={option.value}>{option.label}</MenuItem>);
+      })}
     </Field>);
 }
 
 function formFile(inName, inLabel, inRequired, inOptions, inPlacehoder = '', inDisabled, inForm) {
-  const onDrop = (files, e) => {
+  const onDrop = (files) => {
     console.log(files);
     // upload and save the link.
     inForm.change(inName, files);
@@ -263,7 +266,7 @@ function formFile(inName, inLabel, inRequired, inOptions, inPlacehoder = '', inD
         <Fragment>
           <label>{inLabel}</label>
           <Dropzone onDrop={onDrop}>
-            {({getRootProps, getInputProps}) => (
+            {({ getRootProps, getInputProps }) => (
               <section>
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
@@ -275,5 +278,5 @@ function formFile(inName, inLabel, inRequired, inOptions, inPlacehoder = '', inD
         </Fragment>
       )}
     </Field>
-  </Fragment>)
+  </Fragment>);
 }

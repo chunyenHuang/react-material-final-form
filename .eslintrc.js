@@ -12,5 +12,9 @@ module.exports = {
     "node": true,
     "es6": true,
     "jest": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
   }
 };
