@@ -34,6 +34,8 @@ function renderFormField(inFormFieldProp = {}, inPrefixKey) {
     formObjects,
     formInputArrayObject,
     // formDescription,
+    formFormatFunction,
+    formParseFunction,
     isRequired,
     isDisabled,
     type,
@@ -83,9 +85,9 @@ function renderFormField(inFormFieldProp = {}, inPrefixKey) {
   case 'textarea':
     return formTextarea(formKey, label, isRequired);
   case 'date':
-    return formDate(formKey, label, isRequired);
+    return formDate(formKey, label, isRequired, formFormatFunction, formParseFunction);
   case 'datetime':
-    return formDateTime(formKey, label, isRequired);
+    return formDateTime(formKey, label, isRequired, formFormatFunction, formParseFunction);
   case 'phone':
     return formInputPhone(formKey, label, isRequired);
   default:
@@ -131,14 +133,17 @@ function formInputPhone(inName, inLabel, inRequired = true, inDisabled = false) 
     required={inRequired}
     name={inName}
     component={TextField}
-    parse={normalizePhone}
+    parse={(value)=>{
+      return value.replace(/\D+/g, '');
+    }}
+    format={normalizePhone}
     disabled={inDisabled}
     type="text"
     label={inLabel}
   />);
 }
 
-function formDate(inName, inLabel, inRequired = true, ) {
+function formDate(inName, inLabel, inRequired = true, inFormFormatFunction, inFormParseFunction) {
   return (
     <Field
       className="date-field"
@@ -152,10 +157,16 @@ function formDate(inName, inLabel, inRequired = true, ) {
       InputLabelProps={{
         shrink: true,
       }}
+      format={inFormFormatFunction? inFormFormatFunction : (value)=>{
+        return value;
+      }}
+      parse={inFormParseFunction? inFormParseFunction : (value)=>{
+        return value;
+      }}
     />);
 }
 
-function formDateTime(inName, inLabel, inRequired = true, ) {
+function formDateTime(inName, inLabel, inRequired = true, inFormFormatFunction, inFormParseFunction) {
   return (
     <Field
       className="date-field"
@@ -168,6 +179,12 @@ function formDateTime(inName, inLabel, inRequired = true, ) {
       label={inLabel}
       InputLabelProps={{
         shrink: true,
+      }}
+      format={inFormFormatFunction? inFormFormatFunction : (value)=>{
+        return value;
+      }}
+      parse={inFormParseFunction? inFormParseFunction : (value)=>{
+        return value;
       }}
     />);
 }

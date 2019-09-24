@@ -43,6 +43,8 @@ function renderFormField() {
       formOptions = inFormFieldProp.formOptions,
       formObjects = inFormFieldProp.formObjects,
       formInputArrayObject = inFormFieldProp.formInputArrayObject,
+      formFormatFunction = inFormFieldProp.formFormatFunction,
+      formParseFunction = inFormFieldProp.formParseFunction,
       isRequired = inFormFieldProp.isRequired,
       isDisabled = inFormFieldProp.isDisabled,
       type = inFormFieldProp.type;
@@ -91,10 +93,10 @@ function renderFormField() {
       return formTextarea(formKey, label, isRequired);
 
     case 'date':
-      return formDate(formKey, label, isRequired);
+      return formDate(formKey, label, isRequired, formFormatFunction, formParseFunction);
 
     case 'datetime':
-      return formDateTime(formKey, label, isRequired);
+      return formDateTime(formKey, label, isRequired, formFormatFunction, formParseFunction);
 
     case 'phone':
       return formInputPhone(formKey, label, isRequired);
@@ -150,7 +152,10 @@ function formInputPhone(inName, inLabel) {
     required: inRequired,
     name: inName,
     component: _finalFormMaterialUi.TextField,
-    parse: normalizePhone,
+    parse: function parse(value) {
+      return value.replace(/\D+/g, '');
+    },
+    format: normalizePhone,
     disabled: inDisabled,
     type: "text",
     label: inLabel
@@ -159,6 +164,8 @@ function formInputPhone(inName, inLabel) {
 
 function formDate(inName, inLabel) {
   var inRequired = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  var inFormFormatFunction = arguments.length > 3 ? arguments[3] : undefined;
+  var inFormParseFunction = arguments.length > 4 ? arguments[4] : undefined;
   return _react.default.createElement(_reactFinalForm.Field, {
     className: "date-field",
     name: inName,
@@ -170,12 +177,20 @@ function formDate(inName, inLabel) {
     label: inLabel,
     InputLabelProps: {
       shrink: true
+    },
+    format: inFormFormatFunction ? inFormFormatFunction : function (value) {
+      return value;
+    },
+    parse: inFormParseFunction ? inFormParseFunction : function (value) {
+      return value;
     }
   });
 }
 
 function formDateTime(inName, inLabel) {
   var inRequired = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  var inFormFormatFunction = arguments.length > 3 ? arguments[3] : undefined;
+  var inFormParseFunction = arguments.length > 4 ? arguments[4] : undefined;
   return _react.default.createElement(_reactFinalForm.Field, {
     className: "date-field",
     name: inName,
@@ -187,6 +202,12 @@ function formDateTime(inName, inLabel) {
     label: inLabel,
     InputLabelProps: {
       shrink: true
+    },
+    format: inFormFormatFunction ? inFormFormatFunction : function (value) {
+      return value;
+    },
+    parse: inFormParseFunction ? inFormParseFunction : function (value) {
+      return value;
     }
   });
 }

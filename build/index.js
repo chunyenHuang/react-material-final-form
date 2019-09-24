@@ -4,6 +4,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
+var _moment = _interopRequireDefault(require("moment"));
+
 var _DetailForm = _interopRequireDefault(require("./DetailForm.jsx"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39,6 +41,17 @@ var metadata = {
     type: 'string',
     label: 'Date',
     formType: 'date'
+  }, {
+    key: 'dateWithParseFunction',
+    type: 'string',
+    label: 'Date with parse function',
+    formType: 'date',
+    formFormatFunction: function formFormatFunction(value) {
+      return (0, _moment.default)(value).format('YYYY-MM-DD');
+    },
+    formParseFunction: function formParseFunction(value) {
+      return (0, _moment.default)(value).toISOString();
+    }
   }, {
     key: 'dateTime',
     type: 'string',
@@ -182,9 +195,10 @@ var metadata = {
 var data = {
   text: 'Value',
   textarea: "abc\n123\nabc",
-  phone: '(123) 123-1231',
+  phone: '1231231231',
   number: 1024,
   date: '2019-02-01',
+  dateWithParseFunction: '2019-01-21T08:00:00.000Z',
   dateTime: '2019-01-21T12:59:01',
   disabledField: 'Disabled',
   radio: 1,
