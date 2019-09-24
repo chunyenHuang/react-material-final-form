@@ -1,0 +1,34 @@
+{
+    "jslint.enable": false,
+    "editor.selectionClipboard": false,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "html.format.wrapAttributes": "force-aligned",
+    "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "beautify.language": {
+        "js": {
+            "type": [
+                "javascript",
+                "json",
+                "jsonc",
+                "javascriptreact"
+            ],
+            "filename": [
+                ".jshintrc",
+                ".jsbeautifyrc"
+            ]
+        },
+        "css": [
+            "css",
+            "scss"
+        ],
+        "html": [
+            "htm",
+            "html"
+        ]
+    },
+    "beautify.config": {
+        "e4x": true
+    }
+}

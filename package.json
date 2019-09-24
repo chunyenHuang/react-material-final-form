@@ -2,12 +2,10 @@
   "name": "react-material-final-form",
   "version": "1.0.2",
   "description": "",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "main": "build/index.js",
   "scripts": {
-    "deploy": "npm version patch && npm publish"
+    "build": "webpack --mode production",
+    "deploy": "npm run build &&  npm version patch && npm publish"
   },
   "repository": {
     "type": "git",
@@ -29,10 +27,21 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-dropzone": "^10.1.9",
-    "react-final-form": "^6.3.0"
+    "react-final-form": "^6.3.0",
+    "react-final-form-arrays": "^3.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
     "eslint": "^6.4.0",
-    "react-scripts": "^3.1.2"
+    "react-scripts": "^3.1.2",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0"
   }
 }
