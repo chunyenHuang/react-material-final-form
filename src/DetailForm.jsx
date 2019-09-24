@@ -13,7 +13,7 @@ import {
 
 import {
   renderFormField,
-} from './FormFields.jsx';
+} from './FormFields';
 
 import './DetailForm.css';
 
