@@ -15,10 +15,6 @@
   },
   "author": "John Huang <little78926@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/chunyenHuang/react-material-form/issues"
-  },
-  "homepage": "https://github.com/chunyenHuang/react-material-form#readme",
   "dependencies": {
     "@material-ui/core": "^4.4.3",
     "final-form": "^4.18.5",
