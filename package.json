@@ -2,11 +2,12 @@
   "name": "react-material-final-form",
   "version": "1.0.9",
   "description": "",
-  "main": "build/DetailForm.js",
+  "main": "dist/DetailForm.js",
   "scripts": {
     "start": "react-scripts start",
-    "build": "babel src --out-dir build --copy-files",
-    "deploy": "npm version patch && npm publish"
+    "build": "babel src --out-dir dist --copy-files",
+    "deploy": "npm version patch && npm publish",
+    "build:page": "react-scripts build"
   },
   "repository": {
     "type": "git",

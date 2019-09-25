@@ -54,6 +54,23 @@ function App() {
 export default App;
 ```
 
+## Dependencies
+
+```json
+"dependencies": {
+    "@material-ui/core": "^4.4.3",
+    "final-form": "^4.18.5",
+    "final-form-arrays": "^3.0.1",
+    "final-form-material-ui": "^0.3.0",
+    "final-form-set-field-data": "^1.0.2",
+    "object-diff": "0.0.4",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-dropzone": "^10.1.9",
+    "react-final-form": "^6.3.0",
+    "react-final-form-arrays": "^3.1.1"
+}
+```
 
 ## Fields
 
