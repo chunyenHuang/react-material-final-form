@@ -1,5 +1,11 @@
 # react-material-final-form
 
+Easy & Simple form with Material UI and Final Form.
+
+[Demo](http://react-material-final-form.s3-website-us-east-1.amazonaws.com/)
+
+![preview](./public/preview.png)
+
 ## GetStarted
 
 ```bash

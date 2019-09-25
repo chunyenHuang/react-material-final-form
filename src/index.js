@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react'; // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom';
 import moment from 'moment';
+import {
+  Grid, // eslint-disable-line no-unused-vars
+  Paper, // eslint-disable-line no-unused-vars
+} from '@material-ui/core';
 import DetailForm from './DetailForm.jsx'; // eslint-disable-line no-unused-vars
 
 const metadata = {
-  title: 'My form',
   fields: [{
     key: 'text',
     type: 'string',
@@ -162,16 +165,19 @@ const data = {
 
 function App() { // eslint-disable-line no-unused-vars
   return (
-    <Fragment>
-      <h1>React Material Final Form</h1>
-      <DetailForm 
-        title={metadata.title}
-        metadata={metadata}
-        data={data}
-        debug={true}
-        onSubmit={console.log}
-      />
-    </Fragment>
+    <Grid container justify="center" spacing={8}>
+      <Grid item xs={12} md={6}>
+        <Paper style={{padding: '32px' }}>
+          <DetailForm 
+            title={'React Material Final Form'}
+            metadata={metadata}
+            data={data}
+            debug={true}
+            onSubmit={console.log}
+          />
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
 
