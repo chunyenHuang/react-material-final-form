@@ -26,7 +26,8 @@ export default class DetailForm extends Component {
     const {
       metadata,
       debug,
-      submitButtonText = 'Save'
+      submitButtonText = 'Save',
+      isLoading = false,
     } = this.props;
     const title = this.props.title || this.props.metadata.title || 'Form';
     const {
@@ -70,7 +71,7 @@ export default class DetailForm extends Component {
               variant="contained"
               color="primary"
               type="submit"
-              disabled={submitting || invalid || pristine}
+              disabled={isLoading || submitting || invalid || pristine}
             >
               {submitButtonText}
             </Button>
