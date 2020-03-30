@@ -6,6 +6,8 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
+var _core = require("@material-ui/core");
+
 var _DetailForm = _interopRequireDefault(require("./DetailForm.jsx"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -17,7 +19,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // eslint-disable-line no-unused-vars
 // eslint-disable-line no-unused-vars
 var metadata = {
-  title: 'My form',
   fields: [{
     key: 'text',
     type: 'string',
@@ -220,13 +221,25 @@ var data = {
 
 function App() {
   // eslint-disable-line no-unused-vars
-  return _react.default.createElement(_react.Fragment, null, _react.default.createElement("h1", null, "React Material Final Form"), _react.default.createElement(_DetailForm.default, {
-    title: metadata.title,
+  return _react.default.createElement(_core.Grid, {
+    container: true,
+    justify: "center",
+    spacing: 8
+  }, _react.default.createElement(_core.Grid, {
+    item: true,
+    xs: 12,
+    md: 6
+  }, _react.default.createElement(_core.Paper, {
+    style: {
+      padding: '32px'
+    }
+  }, _react.default.createElement(_DetailForm.default, {
+    title: 'React Material Final Form',
     metadata: metadata,
     data: data,
     debug: true,
     onSubmit: console.log
-  }));
+  }))));
 }
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById('root')); // eslint-disable-line no-undef

@@ -76,7 +76,9 @@ function (_Component) {
           metadata = _this$props.metadata,
           debug = _this$props.debug,
           _this$props$submitBut = _this$props.submitButtonText,
-          submitButtonText = _this$props$submitBut === void 0 ? 'Save' : _this$props$submitBut;
+          submitButtonText = _this$props$submitBut === void 0 ? 'Save' : _this$props$submitBut,
+          _this$props$isLoading = _this$props.isLoading,
+          isLoading = _this$props$isLoading === void 0 ? false : _this$props$isLoading;
       var title = _this.props.title || _this.props.metadata.title || 'Form';
       var pristine = renderProps.pristine,
           submitting = renderProps.submitting,
@@ -110,7 +112,7 @@ function (_Component) {
         variant: "contained",
         color: "primary",
         type: "submit",
-        disabled: submitting || invalid || pristine
+        disabled: isLoading || submitting || invalid || pristine
       }, submitButtonText))), debug && _react.default.createElement("pre", null, JSON.stringify(values || {}, 0, 2)));
     });
 
