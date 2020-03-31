@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "babel src --out-dir dist --copy-files",
-    "deploy": "npm version patch && npm publish",
+    "deploy": "npm run build && npm version patch && npm publish",
     "build:page": "react-scripts build"
   },
   "repository": {
