@@ -28,8 +28,14 @@ export default class DetailForm extends Component {
       debug,
       submitButtonText = 'Save',
       isLoading = false,
+      submitButtonProps = {
+        variant: 'contained',
+        color: 'primary',
+        type: 'submit',
+        fullWidth: true,
+      },
     } = this.props;
-    const title = this.props.title || this.props.metadata.title || 'Form';
+    const title = this.props.title || this.props.metadata.title;
     const {
       // handleSubmit,
       pristine,
@@ -41,12 +47,16 @@ export default class DetailForm extends Component {
 
     return (
       <Fragment>
-        <Typography variant="h5">
-          {title}
-        </Typography>
-          
-        <hr />
-        
+        {title && 
+          <Fragment>
+            <Typography variant="h5">
+              {title}
+            </Typography>
+              
+            <hr />
+          </Fragment>
+        }
+
         {metadata.fields.map((field, index)=>{
           return (<Grid item xs={12} key={index} className="form-field-container">
             {renderFormField(field)}
@@ -68,9 +78,7 @@ export default class DetailForm extends Component {
           </Grid>
           <Grid item xs={6} align="right">
             <Button 
-              variant="contained"
-              color="primary"
-              type="submit"
+              {...submitButtonProps}
               disabled={isLoading || submitting || invalid || pristine}
             >
               {submitButtonText}
