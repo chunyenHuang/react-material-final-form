@@ -91,7 +91,7 @@ export default class DetailForm extends Component {
       renderProps
     } = this.props;
 
-    const title = this.props.title || this.props.metadata.title || 'Form';
+    // const title = this.props.title || this.props.metadata.title || 'Form';
 
     return (
       <div className="react-material-final-form">        
@@ -106,7 +106,7 @@ export default class DetailForm extends Component {
         }
 
         {
-          metadata && !nested && title &&
+          metadata && !nested &&
           <Form
             onSubmit={onSubmit}
             mutators={{ setFieldData, ...arrayMutators }}
