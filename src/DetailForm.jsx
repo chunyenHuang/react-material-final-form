@@ -32,7 +32,7 @@ export default class DetailForm extends Component {
         variant: 'contained',
         color: 'primary',
         type: 'submit',
-        fullWidth: true,
+        fullWidth: false,
       },
     } = this.props;
     const title = this.props.title || this.props.metadata.title;
@@ -64,19 +64,7 @@ export default class DetailForm extends Component {
         })}
 
         <Grid container alignItems="flex-start" spacing={8} style={{ 'marginTop': '20px' }}>
-          <Grid item xs={6} align="left">
-            {/* <Button
-              variant="outlined"
-              color="secondary"
-              onClick={()=>{
-                  this.resetConfirm(form);
-              }}
-              disabled={submitting}
-              >
-              Reset
-              </Button> */}
-          </Grid>
-          <Grid item xs={6} align="right">
+          <Grid item xs={12} align="center">
             <Button 
               {...submitButtonProps}
               disabled={isLoading || submitting || invalid || pristine}
