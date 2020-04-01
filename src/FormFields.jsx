@@ -38,8 +38,11 @@ function renderFormField(inFormFieldProp = {}, inPrefixKey) {
     formParseFunction,
     isRequired,
     isDisabled,
+    isHidden,
     type,
   } = inFormFieldProp;
+
+  if (isHidden) return null;
 
   const formKey = (inPrefixKey) ? `${inPrefixKey}[${key}]` : key;
   switch (formType.toLocaleLowerCase()) {
