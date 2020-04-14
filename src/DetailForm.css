@@ -1,7 +1,7 @@
 .react-material-final-form .form-radio-container > legend {
     font-size: 1rem !important;
     transform: translate(0, 1.5px) scale(0.75);
-    margin-left: -5px;
+    transform-origin: left top;
 }
 
 .react-material-final-form .form-field-container {
