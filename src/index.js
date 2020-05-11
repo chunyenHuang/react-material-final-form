@@ -173,6 +173,7 @@ function App() { // eslint-disable-line no-unused-vars
             metadata={metadata}
             data={data}
             debug={true}
+            usePristine={true}
             onSubmit={console.log}
           />
         </Paper>

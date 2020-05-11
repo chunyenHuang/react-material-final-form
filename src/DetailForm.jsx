@@ -28,6 +28,7 @@ export default class DetailForm extends Component {
       debug,
       submitButtonText = 'Save',
       isLoading = false,
+      usePristine = true,
       submitButtonProps = {
         variant: 'contained',
         color: 'primary',
@@ -67,7 +68,7 @@ export default class DetailForm extends Component {
           <Grid item xs={12} align="center">
             <Button 
               {...submitButtonProps}
-              disabled={isLoading || submitting || invalid || pristine}
+              disabled={isLoading || submitting || invalid || (usePristine && pristine)}
             >
               {submitButtonText}
             </Button>
