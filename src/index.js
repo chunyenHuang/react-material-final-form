@@ -175,7 +175,11 @@ function App() { // eslint-disable-line no-unused-vars
             debug={true}
             usePristine={true}
             onSubmit={console.log}
-          />
+          >
+            <div>
+              Hello World
+            </div>
+          </DetailForm>
         </Paper>
       </Grid>
     </Grid>

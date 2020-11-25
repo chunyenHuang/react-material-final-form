@@ -64,6 +64,8 @@ export default class DetailForm extends Component {
           </Grid>);
         })}
 
+        {this.props.children}
+
         <Grid container alignItems="flex-start" spacing={8} style={{ 'marginTop': '20px' }}>
           <Grid item xs={12} align="center">
             <Button 
